@@ -1,0 +1,100 @@
+﻿@model Constructability_Review_Test_Models.CheckListModel
+@if (Model != null)
+{
+    using (Html.BeginForm("SaveCustomChkListSection", "ConstructabilityCheckList", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditDetails" }))
+    {
+        @Html.HiddenFor(p => p.ChecklistReviewItemSectionItemID)
+        @Html.HiddenFor(p => p.ChecklistReviewID)
+        @Html.HiddenFor(p => p.ChecklistReviewItemID)
+        @Html.HiddenFor(p => p.ChecklistReviewItemMajorSectionName)
+        @Html.HiddenFor(p => p.ChecklistReviewItemDivisionPublic)
+        @Html.HiddenFor(p => p.ChecklistReviewItemMajorSectionSortOrder)
+        @Html.HiddenFor(p => p.ChecklistReviewItemMajorSectionID)
+        @Html.HiddenFor(p => p.ChecklistReviewItemDivisionID)
+        @Html.HiddenFor(p => p.ChecklistReviewItemDivisionName)
+        @Html.HiddenFor(p=>p.ChecklistReviewItemDivisionNumber)
+        @Html.HiddenFor(p => p.ChecklistReviewItemDivisionSortOrder)
+        @Html.HiddenFor(p => p.ChecklistReviewItemSectionID)
+        @Html.HiddenFor(p => p.ChecklistReviewItemSectionName)
+        @Html.HiddenFor(p => p.ChecklistReviewItemSectionSortOrder)
+        
+        @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">SectionItemCode</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemSectionItemCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemSectionItemCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">SectionItemName</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemSectionItemName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemSectionItemName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">SectionItemLink</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemSectionItemLink, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemSectionItemLink, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    @*<div class="form-group">
+        <label class="control-label col-xs-4 ">ResultNamePrecon</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewItemReviewerResultNamePrecon, ViewBag.ChkNameResult as IEnumerable<SelectListItem>, new { Class = "form-control" })           
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerResultNamePrecon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">CommentsPrecon</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemReviewerCommentsPrecon, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerCommentsPrecon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-4">ResultNamePM</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewItemReviewerResultNamePM, ViewBag.ChkNameResult as IEnumerable<SelectListItem>, new { Class = "form-control" })          
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerResultNamePM, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">CommentsPM</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemReviewerCommentsPM, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerCommentsPM, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">ResultNameField</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewItemReviewerResultNameField, ViewBag.ChkNameResult as IEnumerable<SelectListItem>, new { Class = "form-control" })          
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerResultNameField, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4">CommentsField</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChecklistReviewItemReviewerCommentsField, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerCommentsField, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+    <div class="modal-footer">
+        <button class="btn btn-primary" id="btnSave" type="submit" style="margin-left: 50px;" data-toggle="modal">Save</button>
+        <button class="btn btn-primary" id="btnclose" data-dismiss="modal" type="button">Close</button>
+    </div>
+</div>
+}
+}
+

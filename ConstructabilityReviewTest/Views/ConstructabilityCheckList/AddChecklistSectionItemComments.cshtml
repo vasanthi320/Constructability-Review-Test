@@ -1,0 +1,112 @@
+﻿@model Constructability_Review_Test_Models.CheckListReviewItemComments
+@if (Model != null)
+{
+    using (Html.BeginForm("SaveCommentsChkListSectionitem", "ConstructabilityCheckList", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmEditDetails", enctype = "multipart/form-data" }))
+    {
+        @*@Html.HiddenFor(p => p.ChecklistReviewItemSectionItemID)*@
+        @*@Html.HiddenFor(p => p.CheckListReviewID)
+            @Html.HiddenFor(p => p.ChecklistReviewItemID)*@
+        @*@Html.HiddenFor(p => p.ChecklistReviewItemMajorSectionID)*@
+        @*@Html.HiddenFor(p => p.ChecklistReviewItemMajorSectionName)*@
+
+<div class="form-horizontal">
+
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">Design Level</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewDesignLevelCode, ViewBag.DesignLevel as IEnumerable<SelectListItem>, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewDesignLevelCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">Roles</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewItemReviewerRole, ViewBag.RoleLevel as IEnumerable<SelectListItem>, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerRole, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">Results</label>
+        <div class="col-md-8">
+            @Html.DropDownListFor(modelItem => modelItem.ChecklistReviewItemReviewerResultName, ViewBag.ChkNameResult as IEnumerable<SelectListItem>, new { Class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerResultName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">Attachment</label>
+        <div class="col-md-8">
+            @Html.TextBoxFor(modelItem => modelItem.FAttachment, new { Class = "form-control", type = "file" })
+            @Html.ValidationMessageFor(model => model.FAttachment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-4 ">Comments/Actions</label>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.ChecklistReviewItemReviewerResultComments, new { @class = "form-control", rows = "4" })
+            @Html.ValidationMessageFor(model => model.ChecklistReviewItemReviewerResultComments, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" id="btnSave" type="button" onclick="return SaveCommentsChkListSection(@Model.CheckListReviewID,@Model.ChecklistReviewItemID,@Model.ChecklistReviewItemMajorSectionID,'@Model.ChecklistReviewItemMajorSectionName');" style="margin-left: 50px;" data-toggle="modal">Save</button>
+        <button class="btn btn-primary" id="btnclose" data-dismiss="modal" type="button">Close</button>
+    </div>
+</div>
+    }
+}
+@section scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/plugins/data Tables/dataTables.responsive.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+                $(document).ready(function () {
+
+        });
+        function SaveCommentsChkListSection() {
+            debugger;
+            var designLvlCode = $("#ChecklistReviewDesignLevelCode").val();
+            var riwerrole = $("#ChecklistReviewItemReviewerRole").val();
+            var ReviewerName = $("#ChecklistReviewItemReviewerResultName").val();
+            var cmts = $("#ChecklistReviewItemReviewerResultComments").val();
+            var attach = $("#FAttachment").val();
+
+            var myObject = new Object();
+            myObject.designLvlCode = $("#ChecklistReviewDesignLevelCode").val();
+            myObject.riwerrole = $('#ChecklistReviewItemReviewerRole').val();
+            myObject.ReviewerName = $('#ChecklistReviewItemReviewerResultName').val();
+            myObject.cmts = $("#ChecklistReviewItemReviewerResultComments").val();
+            myObject.attach = $("#FAttachment").val();
+            myObject.chkSecNam = $("#ChecklistReviewItemMajorSectionName").val();
+            myObject.chkId = $("#CheckListReviewID").val();
+            myObject.chkItmId = $("#ChecklistReviewItemID").val();
+            myObject.chkSecId = $("#ChecklistReviewItemMajorSectionID").val();
+
+
+            $.ajax({
+                type: "POST",
+                url: '/ConstructabilityCheckList/SaveCommentsChkListSectionitem',
+                data: myObject,
+                //data: {'designCode':designLvlCode, 'Rrole':riwerrole,'Rname':ReviewerName, 'Comments':cmts, 'chkId':chkId, 'chkItmId':chkItmId, 'chkSecId':chkSecId, 'chkSecNam':chkSecNam },
+                contentType: "application/json",
+                success: function (data, textStatus, jqXHR) {
+                   
+                },
+                error: function (xhr) {
+                    console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                }
+            });
+        }
+
+    </script>
+}

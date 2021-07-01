@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRCTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblChecklistReview">
+          <Key>
+            <PropertyRef Name="ChecklistReviewID" />
+          </Key>
+          <Property Name="ChecklistReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistReviewJCCo" Type="tinyint" />
+          <Property Name="ChecklistReviewJob" Type="varchar" MaxLength="10" />
+          <Property Name="ChecklistReviewJobName" Type="varchar" MaxLength="60" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUser" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblChecklistReviewItem">
+          <Key>
+            <PropertyRef Name="ChecklistReviewItemID" />
+          </Key>
+          <Property Name="ChecklistReviewItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistReviewID" Type="int" />
+          <Property Name="ChecklistReviewItemMajorSectionID" Type="int" />
+          <Property Name="ChecklistReviewItemMajorSectionName" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemMajorSectionSortOrder" Type="int" />
+          <Property Name="ChecklistReviewItemDivisionID" Type="int" />
+          <Property Name="ChecklistReviewItemDivisionNumber" Type="varchar" MaxLength="10" />
+          <Property Name="ChecklistReviewItemDivisionName" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemDivisionPublic" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemDivisionSortOrder" Type="int" />
+          <Property Name="ChecklistReviewItemSectionID" Type="int" />
+          <Property Name="ChecklistReviewItemSectionName" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemSectionSortOrder" Type="int" />
+          <Property Name="ChecklistReviewItemSectionItemID" Type="int" />
+          <Property Name="ChecklistReviewItemSectionItemCode" Type="varchar" MaxLength="10" />
+          <Property Name="ChecklistReviewItemSectionItemName" Type="varchar" MaxLength="1000" />
+          <Property Name="ChecklistReviewItemSectionItemLink" Type="varchar" MaxLength="1000" />
+          <Property Name="ChecklistReviewItemSectionItemSortOrder" Type="int" />
+          <Property Name="ChecklistReviewItemReviewerActive" Type="bit" Nullable="false" />
+          <Property Name="ChecklistReviewItemVisible" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUser" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblChecklistReviewItemComment">
+          <Key>
+            <PropertyRef Name="ChecklistReviewItemCommentID" />
+          </Key>
+          <Property Name="ChecklistReviewItemCommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChecklistReviewItemID" Type="int" />
+          <Property Name="ChecklistReviewDesignLevelID" Type="int" />
+          <Property Name="ChecklistReviewDesignLevelCode" Type="varchar" MaxLength="10" />
+          <Property Name="ChecklistReviewDesignLevelName" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemReviewerRole" Type="varchar" MaxLength="100" />
+          <Property Name="ChecklistReviewItemReviewerResultName" Type="varchar" MaxLength="10" />
+          <Property Name="ChecklistReviewItemReviewerResultComments" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedUser" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedUser" Type="varchar" MaxLength="50" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="AttachmentName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tblJob">
+          <Key>
+            <PropertyRef Name="JCCo" />
+            <PropertyRef Name="Job" />
+          </Key>
+          <Property Name="JCCo" Type="tinyint" Nullable="false" />
+          <Property Name="Job" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="JobNum" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTemplateDesignLevel">
+          <Key>
+            <PropertyRef Name="TemplateDesignLevelID" />
+          </Key>
+          <Property Name="TemplateDesignLevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateDesignLevelCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TemplateDesignLevelName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TemplateDesignLevelSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateDesignLevelActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateDivision">
+          <Key>
+            <PropertyRef Name="TemplateDivisionID" />
+          </Key>
+          <Property Name="TemplateDivisionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateDivisionNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TemplateDivisionName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TemplateDivisionPublic" Type="varchar" MaxLength="100" />
+          <Property Name="TemplateMajorSectionID" Type="int" Nullable="false" />
+          <Property Name="TemplateDivisionSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateDivisionActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateMajorSection">
+          <Key>
+            <PropertyRef Name="TemplateMajorSectionID" />
+          </Key>
+          <Property Name="TemplateMajorSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateMajorSectionName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TemplateMajorSectionSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateMajorSectionActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateResult">
+          <Key>
+            <PropertyRef Name="TemplateResultID" />
+          </Key>
+          <Property Name="TemplateResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateResultName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TemplateResultSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateResultActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateReviewerType">
+          <Key>
+            <PropertyRef Name="TemplateReviewerTypeID" />
+          </Key>
+          <Property Name="TemplateReviewerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateReviewerTypeCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TemplateReviewerTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TemplateReviewerTypeSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateReviewerTypeActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateSection">
+          <Key>
+            <PropertyRef Name="TemplateSectionID" />
+          </Key>
+          <Property Name="TemplateSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateSectionName" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TemplateMajorSectionID" Type="int" Nullable="false" />
+          <Property Name="TemplateDivisionID" Type="int" Nullable="false" />
+          <Property Name="TemplateSectionSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateSectionActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateSectionItem">
+          <Key>
+            <PropertyRef Name="TemplateSectionItemID" />
+          </Key>
+          <Property Name="TemplateSectionItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TemplateSectionItemCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TemplateSectionItemName" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TemplateSectionItemLink" Type="varchar" MaxLength="1000" />
+          <Property Name="TemplateSectionID" Type="int" Nullable="false" />
+          <Property Name="TemplateSectionItemSortOrder" Type="int" Nullable="false" />
+          <Property Name="TemplateSectionItemActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblChecklistReview_tblJob">
+          <End Role="tblJob" Type="Self.tblJob" Multiplicity="0..1" />
+          <End Role="tblChecklistReview" Type="Self.tblChecklistReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJob">
+              <PropertyRef Name="JCCo" />
+              <PropertyRef Name="Job" />
+            </Principal>
+            <Dependent Role="tblChecklistReview">
+              <PropertyRef Name="ChecklistReviewJCCo" />
+              <PropertyRef Name="ChecklistReviewJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChecklistReviewItem_tblChecklistReview">
+          <End Role="tblChecklistReview" Type="Self.tblChecklistReview" Multiplicity="0..1" />
+          <End Role="tblChecklistReviewItem" Type="Self.tblChecklistReviewItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChecklistReview">
+              <PropertyRef Name="ChecklistReviewID" />
+            </Principal>
+            <Dependent Role="tblChecklistReviewItem">
+              <PropertyRef Name="ChecklistReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChecklistReviewItemComment_tblChecklistReviewItem">
+          <End Role="tblChecklistReviewItem" Type="Self.tblChecklistReviewItem" Multiplicity="0..1" />
+          <End Role="tblChecklistReviewItemComment" Type="Self.tblChecklistReviewItemComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChecklistReviewItem">
+              <PropertyRef Name="ChecklistReviewItemID" />
+            </Principal>
+            <Dependent Role="tblChecklistReviewItemComment">
+              <PropertyRef Name="ChecklistReviewItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateDivision_tblTemplateMajorSection">
+          <End Role="tblTemplateMajorSection" Type="Self.tblTemplateMajorSection" Multiplicity="1" />
+          <End Role="tblTemplateDivision" Type="Self.tblTemplateDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateMajorSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateDivision">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSection_tblTemplateDivision">
+          <End Role="tblTemplateDivision" Type="Self.tblTemplateDivision" Multiplicity="1" />
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateDivision">
+              <PropertyRef Name="TemplateDivisionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSection">
+              <PropertyRef Name="TemplateDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSection_tblTemplateMajorSection">
+          <End Role="tblTemplateMajorSection" Type="Self.tblTemplateMajorSection" Multiplicity="1" />
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateMajorSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSectionItem_tblTemplateSection">
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="1" />
+          <End Role="tblTemplateSectionItem" Type="Self.tblTemplateSectionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateSection">
+              <PropertyRef Name="TemplateSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSectionItem">
+              <PropertyRef Name="TemplateSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spBuild_JobOppList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spBuild_NewChecklistReviewForEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Job" Type="varchar" Mode="In" />
+          <Parameter Name="User" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CRCTestModelStoreContainer">
+          <EntitySet Name="tblChecklistReview" EntityType="Self.tblChecklistReview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblChecklistReviewItem" EntityType="Self.tblChecklistReviewItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblChecklistReviewItemComment" EntityType="Self.tblChecklistReviewItemComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJob" EntityType="Self.tblJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateDesignLevel" EntityType="Self.tblTemplateDesignLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateDivision" EntityType="Self.tblTemplateDivision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateMajorSection" EntityType="Self.tblTemplateMajorSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateResult" EntityType="Self.tblTemplateResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateReviewerType" EntityType="Self.tblTemplateReviewerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateSection" EntityType="Self.tblTemplateSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTemplateSectionItem" EntityType="Self.tblTemplateSectionItem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblChecklistReview_tblJob" Association="Self.FK_tblChecklistReview_tblJob">
+            <End Role="tblJob" EntitySet="tblJob" />
+            <End Role="tblChecklistReview" EntitySet="tblChecklistReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChecklistReviewItem_tblChecklistReview" Association="Self.FK_tblChecklistReviewItem_tblChecklistReview">
+            <End Role="tblChecklistReview" EntitySet="tblChecklistReview" />
+            <End Role="tblChecklistReviewItem" EntitySet="tblChecklistReviewItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChecklistReviewItemComment_tblChecklistReviewItem" Association="Self.FK_tblChecklistReviewItemComment_tblChecklistReviewItem">
+            <End Role="tblChecklistReviewItem" EntitySet="tblChecklistReviewItem" />
+            <End Role="tblChecklistReviewItemComment" EntitySet="tblChecklistReviewItemComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateDivision_tblTemplateMajorSection" Association="Self.FK_tblTemplateDivision_tblTemplateMajorSection">
+            <End Role="tblTemplateMajorSection" EntitySet="tblTemplateMajorSection" />
+            <End Role="tblTemplateDivision" EntitySet="tblTemplateDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSection_tblTemplateDivision" Association="Self.FK_tblTemplateSection_tblTemplateDivision">
+            <End Role="tblTemplateDivision" EntitySet="tblTemplateDivision" />
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSection_tblTemplateMajorSection" Association="Self.FK_tblTemplateSection_tblTemplateMajorSection">
+            <End Role="tblTemplateMajorSection" EntitySet="tblTemplateMajorSection" />
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSectionItem_tblTemplateSection" Association="Self.FK_tblTemplateSectionItem_tblTemplateSection">
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSection" />
+            <End Role="tblTemplateSectionItem" EntitySet="tblTemplateSectionItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRCTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblChecklistReview">
+          <Key>
+            <PropertyRef Name="ChecklistReviewID" />
+          </Key>
+          <Property Name="ChecklistReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistReviewJCCo" Type="Byte" />
+          <Property Name="ChecklistReviewJob" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewJobName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblJob" Relationship="Self.FK_tblChecklistReview_tblJob" FromRole="tblChecklistReview" ToRole="tblJob" />
+          <NavigationProperty Name="tblChecklistReviewItems" Relationship="Self.FK_tblChecklistReviewItem_tblChecklistReview" FromRole="tblChecklistReview" ToRole="tblChecklistReviewItem" />
+        </EntityType>
+        <EntityType Name="tblChecklistReviewItem">
+          <Key>
+            <PropertyRef Name="ChecklistReviewItemID" />
+          </Key>
+          <Property Name="ChecklistReviewItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistReviewID" Type="Int32" />
+          <Property Name="ChecklistReviewItemMajorSectionID" Type="Int32" />
+          <Property Name="ChecklistReviewItemMajorSectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemMajorSectionSortOrder" Type="Int32" />
+          <Property Name="ChecklistReviewItemDivisionID" Type="Int32" />
+          <Property Name="ChecklistReviewItemDivisionNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemDivisionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemDivisionPublic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemDivisionSortOrder" Type="Int32" />
+          <Property Name="ChecklistReviewItemSectionID" Type="Int32" />
+          <Property Name="ChecklistReviewItemSectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemSectionSortOrder" Type="Int32" />
+          <Property Name="ChecklistReviewItemSectionItemID" Type="Int32" />
+          <Property Name="ChecklistReviewItemSectionItemCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemSectionItemName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemSectionItemLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemSectionItemSortOrder" Type="Int32" />
+          <Property Name="ChecklistReviewItemReviewerActive" Type="Boolean" Nullable="false" />
+          <Property Name="ChecklistReviewItemVisible" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblChecklistReview" Relationship="Self.FK_tblChecklistReviewItem_tblChecklistReview" FromRole="tblChecklistReviewItem" ToRole="tblChecklistReview" />
+          <NavigationProperty Name="tblChecklistReviewItemComments" Relationship="Self.FK_tblChecklistReviewItemComment_tblChecklistReviewItem" FromRole="tblChecklistReviewItem" ToRole="tblChecklistReviewItemComment" />
+        </EntityType>
+        <EntityType Name="tblChecklistReviewItemComment">
+          <Key>
+            <PropertyRef Name="ChecklistReviewItemCommentID" />
+          </Key>
+          <Property Name="ChecklistReviewItemCommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChecklistReviewItemID" Type="Int32" />
+          <Property Name="ChecklistReviewDesignLevelID" Type="Int32" />
+          <Property Name="ChecklistReviewDesignLevelCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewDesignLevelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemReviewerRole" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemReviewerResultName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ChecklistReviewItemReviewerResultComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblChecklistReviewItem" Relationship="Self.FK_tblChecklistReviewItemComment_tblChecklistReviewItem" FromRole="tblChecklistReviewItemComment" ToRole="tblChecklistReviewItem" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AttachmentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblJob">
+          <Key>
+            <PropertyRef Name="JCCo" />
+            <PropertyRef Name="Job" />
+          </Key>
+          <Property Name="JCCo" Type="Byte" Nullable="false" />
+          <Property Name="Job" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JobNum" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tblChecklistReviews" Relationship="Self.FK_tblChecklistReview_tblJob" FromRole="tblJob" ToRole="tblChecklistReview" />
+        </EntityType>
+        <EntityType Name="tblTemplateDesignLevel">
+          <Key>
+            <PropertyRef Name="TemplateDesignLevelID" />
+          </Key>
+          <Property Name="TemplateDesignLevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateDesignLevelCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateDesignLevelName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateDesignLevelSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateDesignLevelActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateDivision">
+          <Key>
+            <PropertyRef Name="TemplateDivisionID" />
+          </Key>
+          <Property Name="TemplateDivisionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateDivisionNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateDivisionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateDivisionPublic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TemplateMajorSectionID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateDivisionSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateDivisionActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblTemplateMajorSection" Relationship="Self.FK_tblTemplateDivision_tblTemplateMajorSection" FromRole="tblTemplateDivision" ToRole="tblTemplateMajorSection" />
+          <NavigationProperty Name="tblTemplateSections" Relationship="Self.FK_tblTemplateSection_tblTemplateDivision" FromRole="tblTemplateDivision" ToRole="tblTemplateSection" />
+        </EntityType>
+        <EntityType Name="tblTemplateMajorSection">
+          <Key>
+            <PropertyRef Name="TemplateMajorSectionID" />
+          </Key>
+          <Property Name="TemplateMajorSectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateMajorSectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateMajorSectionSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateMajorSectionActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblTemplateDivisions" Relationship="Self.FK_tblTemplateDivision_tblTemplateMajorSection" FromRole="tblTemplateMajorSection" ToRole="tblTemplateDivision" />
+          <NavigationProperty Name="tblTemplateSections" Relationship="Self.FK_tblTemplateSection_tblTemplateMajorSection" FromRole="tblTemplateMajorSection" ToRole="tblTemplateSection" />
+        </EntityType>
+        <EntityType Name="tblTemplateResult">
+          <Key>
+            <PropertyRef Name="TemplateResultID" />
+          </Key>
+          <Property Name="TemplateResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateResultName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateResultSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateResultActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateReviewerType">
+          <Key>
+            <PropertyRef Name="TemplateReviewerTypeID" />
+          </Key>
+          <Property Name="TemplateReviewerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateReviewerTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateReviewerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateReviewerTypeSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateReviewerTypeActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTemplateSection">
+          <Key>
+            <PropertyRef Name="TemplateSectionID" />
+          </Key>
+          <Property Name="TemplateSectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateSectionName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateMajorSectionID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateDivisionID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateSectionSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateSectionActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblTemplateDivision" Relationship="Self.FK_tblTemplateSection_tblTemplateDivision" FromRole="tblTemplateSection" ToRole="tblTemplateDivision" />
+          <NavigationProperty Name="tblTemplateMajorSection" Relationship="Self.FK_tblTemplateSection_tblTemplateMajorSection" FromRole="tblTemplateSection" ToRole="tblTemplateMajorSection" />
+          <NavigationProperty Name="tblTemplateSectionItems" Relationship="Self.FK_tblTemplateSectionItem_tblTemplateSection" FromRole="tblTemplateSection" ToRole="tblTemplateSectionItem" />
+        </EntityType>
+        <EntityType Name="tblTemplateSectionItem">
+          <Key>
+            <PropertyRef Name="TemplateSectionItemID" />
+          </Key>
+          <Property Name="TemplateSectionItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TemplateSectionItemCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateSectionItemName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TemplateSectionItemLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="TemplateSectionID" Type="Int32" Nullable="false" />
+          <Property Name="TemplateSectionItemSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="TemplateSectionItemActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblTemplateSection" Relationship="Self.FK_tblTemplateSectionItem_tblTemplateSection" FromRole="tblTemplateSectionItem" ToRole="tblTemplateSection" />
+        </EntityType>
+        <Association Name="FK_tblChecklistReview_tblJob">
+          <End Role="tblJob" Type="Self.tblJob" Multiplicity="0..1" />
+          <End Role="tblChecklistReview" Type="Self.tblChecklistReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJob">
+              <PropertyRef Name="JCCo" />
+              <PropertyRef Name="Job" />
+            </Principal>
+            <Dependent Role="tblChecklistReview">
+              <PropertyRef Name="ChecklistReviewJCCo" />
+              <PropertyRef Name="ChecklistReviewJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChecklistReviewItem_tblChecklistReview">
+          <End Role="tblChecklistReview" Type="Self.tblChecklistReview" Multiplicity="0..1" />
+          <End Role="tblChecklistReviewItem" Type="Self.tblChecklistReviewItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChecklistReview">
+              <PropertyRef Name="ChecklistReviewID" />
+            </Principal>
+            <Dependent Role="tblChecklistReviewItem">
+              <PropertyRef Name="ChecklistReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblChecklistReviewItemComment_tblChecklistReviewItem">
+          <End Role="tblChecklistReviewItem" Type="Self.tblChecklistReviewItem" Multiplicity="0..1" />
+          <End Role="tblChecklistReviewItemComment" Type="Self.tblChecklistReviewItemComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblChecklistReviewItem">
+              <PropertyRef Name="ChecklistReviewItemID" />
+            </Principal>
+            <Dependent Role="tblChecklistReviewItemComment">
+              <PropertyRef Name="ChecklistReviewItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateDivision_tblTemplateMajorSection">
+          <End Role="tblTemplateMajorSection" Type="Self.tblTemplateMajorSection" Multiplicity="1" />
+          <End Role="tblTemplateDivision" Type="Self.tblTemplateDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateMajorSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateDivision">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSection_tblTemplateDivision">
+          <End Role="tblTemplateDivision" Type="Self.tblTemplateDivision" Multiplicity="1" />
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateDivision">
+              <PropertyRef Name="TemplateDivisionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSection">
+              <PropertyRef Name="TemplateDivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSection_tblTemplateMajorSection">
+          <End Role="tblTemplateMajorSection" Type="Self.tblTemplateMajorSection" Multiplicity="1" />
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateMajorSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSection">
+              <PropertyRef Name="TemplateMajorSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTemplateSectionItem_tblTemplateSection">
+          <End Role="tblTemplateSection" Type="Self.tblTemplateSection" Multiplicity="1" />
+          <End Role="tblTemplateSectionItem" Type="Self.tblTemplateSectionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTemplateSection">
+              <PropertyRef Name="TemplateSectionID" />
+            </Principal>
+            <Dependent Role="tblTemplateSectionItem">
+              <PropertyRef Name="TemplateSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRCTestEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblChecklistReviews" EntityType="Self.tblChecklistReview" />
+          <EntitySet Name="tblChecklistReviewItems" EntityType="Self.tblChecklistReviewItem" />
+          <EntitySet Name="tblChecklistReviewItemComments" EntityType="Self.tblChecklistReviewItemComment" />
+          <EntitySet Name="tblJobs" EntityType="Self.tblJob" />
+          <EntitySet Name="tblTemplateDesignLevels" EntityType="Self.tblTemplateDesignLevel" />
+          <EntitySet Name="tblTemplateDivisions" EntityType="Self.tblTemplateDivision" />
+          <EntitySet Name="tblTemplateMajorSections" EntityType="Self.tblTemplateMajorSection" />
+          <EntitySet Name="tblTemplateResults" EntityType="Self.tblTemplateResult" />
+          <EntitySet Name="tblTemplateReviewerTypes" EntityType="Self.tblTemplateReviewerType" />
+          <EntitySet Name="tblTemplateSections" EntityType="Self.tblTemplateSection" />
+          <EntitySet Name="tblTemplateSectionItems" EntityType="Self.tblTemplateSectionItem" />
+          <AssociationSet Name="FK_tblChecklistReview_tblJob" Association="Self.FK_tblChecklistReview_tblJob">
+            <End Role="tblJob" EntitySet="tblJobs" />
+            <End Role="tblChecklistReview" EntitySet="tblChecklistReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChecklistReviewItem_tblChecklistReview" Association="Self.FK_tblChecklistReviewItem_tblChecklistReview">
+            <End Role="tblChecklistReview" EntitySet="tblChecklistReviews" />
+            <End Role="tblChecklistReviewItem" EntitySet="tblChecklistReviewItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblChecklistReviewItemComment_tblChecklistReviewItem" Association="Self.FK_tblChecklistReviewItemComment_tblChecklistReviewItem">
+            <End Role="tblChecklistReviewItem" EntitySet="tblChecklistReviewItems" />
+            <End Role="tblChecklistReviewItemComment" EntitySet="tblChecklistReviewItemComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateDivision_tblTemplateMajorSection" Association="Self.FK_tblTemplateDivision_tblTemplateMajorSection">
+            <End Role="tblTemplateMajorSection" EntitySet="tblTemplateMajorSections" />
+            <End Role="tblTemplateDivision" EntitySet="tblTemplateDivisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSection_tblTemplateDivision" Association="Self.FK_tblTemplateSection_tblTemplateDivision">
+            <End Role="tblTemplateDivision" EntitySet="tblTemplateDivisions" />
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSection_tblTemplateMajorSection" Association="Self.FK_tblTemplateSection_tblTemplateMajorSection">
+            <End Role="tblTemplateMajorSection" EntitySet="tblTemplateMajorSections" />
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTemplateSectionItem_tblTemplateSection" Association="Self.FK_tblTemplateSectionItem_tblTemplateSection">
+            <End Role="tblTemplateSection" EntitySet="tblTemplateSections" />
+            <End Role="tblTemplateSectionItem" EntitySet="tblTemplateSectionItems" />
+          </AssociationSet>
+          <FunctionImport Name="spBuild_JobOppList" />
+          <FunctionImport Name="spBuild_NewChecklistReviewForEdit" ReturnType="Collection(Int32)">
+            <Parameter Name="Job" Mode="In" Type="String" />
+            <Parameter Name="User" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRCTestModelStoreContainer" CdmEntityContainer="CRCTestEntities1">
+          <EntitySetMapping Name="tblChecklistReviews">
+            <EntityTypeMapping TypeName="CRCTestModel.tblChecklistReview">
+              <MappingFragment StoreEntitySet="tblChecklistReview">
+                <ScalarProperty Name="ChecklistReviewID" ColumnName="ChecklistReviewID" />
+                <ScalarProperty Name="ChecklistReviewJCCo" ColumnName="ChecklistReviewJCCo" />
+                <ScalarProperty Name="ChecklistReviewJob" ColumnName="ChecklistReviewJob" />
+                <ScalarProperty Name="ChecklistReviewJobName" ColumnName="ChecklistReviewJobName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblChecklistReviewItems">
+            <EntityTypeMapping TypeName="CRCTestModel.tblChecklistReviewItem">
+              <MappingFragment StoreEntitySet="tblChecklistReviewItem">
+                <ScalarProperty Name="ChecklistReviewItemID" ColumnName="ChecklistReviewItemID" />
+                <ScalarProperty Name="ChecklistReviewID" ColumnName="ChecklistReviewID" />
+                <ScalarProperty Name="ChecklistReviewItemMajorSectionID" ColumnName="ChecklistReviewItemMajorSectionID" />
+                <ScalarProperty Name="ChecklistReviewItemMajorSectionName" ColumnName="ChecklistReviewItemMajorSectionName" />
+                <ScalarProperty Name="ChecklistReviewItemMajorSectionSortOrder" ColumnName="ChecklistReviewItemMajorSectionSortOrder" />
+                <ScalarProperty Name="ChecklistReviewItemDivisionID" ColumnName="ChecklistReviewItemDivisionID" />
+                <ScalarProperty Name="ChecklistReviewItemDivisionNumber" ColumnName="ChecklistReviewItemDivisionNumber" />
+                <ScalarProperty Name="ChecklistReviewItemDivisionName" ColumnName="ChecklistReviewItemDivisionName" />
+                <ScalarProperty Name="ChecklistReviewItemDivisionPublic" ColumnName="ChecklistReviewItemDivisionPublic" />
+                <ScalarProperty Name="ChecklistReviewItemDivisionSortOrder" ColumnName="ChecklistReviewItemDivisionSortOrder" />
+                <ScalarProperty Name="ChecklistReviewItemSectionID" ColumnName="ChecklistReviewItemSectionID" />
+                <ScalarProperty Name="ChecklistReviewItemSectionName" ColumnName="ChecklistReviewItemSectionName" />
+                <ScalarProperty Name="ChecklistReviewItemSectionSortOrder" ColumnName="ChecklistReviewItemSectionSortOrder" />
+                <ScalarProperty Name="ChecklistReviewItemSectionItemID" ColumnName="ChecklistReviewItemSectionItemID" />
+                <ScalarProperty Name="ChecklistReviewItemSectionItemCode" ColumnName="ChecklistReviewItemSectionItemCode" />
+                <ScalarProperty Name="ChecklistReviewItemSectionItemName" ColumnName="ChecklistReviewItemSectionItemName" />
+                <ScalarProperty Name="ChecklistReviewItemSectionItemLink" ColumnName="ChecklistReviewItemSectionItemLink" />
+                <ScalarProperty Name="ChecklistReviewItemSectionItemSortOrder" ColumnName="ChecklistReviewItemSectionItemSortOrder" />
+                <ScalarProperty Name="ChecklistReviewItemReviewerActive" ColumnName="ChecklistReviewItemReviewerActive" />
+                <ScalarProperty Name="ChecklistReviewItemVisible" ColumnName="ChecklistReviewItemVisible" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblChecklistReviewItemComments">
+            <EntityTypeMapping TypeName="CRCTestModel.tblChecklistReviewItemComment">
+              <MappingFragment StoreEntitySet="tblChecklistReviewItemComment">
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="ChecklistReviewItemCommentID" ColumnName="ChecklistReviewItemCommentID" />
+                <ScalarProperty Name="ChecklistReviewItemID" ColumnName="ChecklistReviewItemID" />
+                <ScalarProperty Name="ChecklistReviewDesignLevelID" ColumnName="ChecklistReviewDesignLevelID" />
+                <ScalarProperty Name="ChecklistReviewDesignLevelCode" ColumnName="ChecklistReviewDesignLevelCode" />
+                <ScalarProperty Name="ChecklistReviewDesignLevelName" ColumnName="ChecklistReviewDesignLevelName" />
+                <ScalarProperty Name="ChecklistReviewItemReviewerRole" ColumnName="ChecklistReviewItemReviewerRole" />
+                <ScalarProperty Name="ChecklistReviewItemReviewerResultName" ColumnName="ChecklistReviewItemReviewerResultName" />
+                <ScalarProperty Name="ChecklistReviewItemReviewerResultComments" ColumnName="ChecklistReviewItemReviewerResultComments" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJobs">
+            <EntityTypeMapping TypeName="CRCTestModel.tblJob">
+              <MappingFragment StoreEntitySet="tblJob">
+                <ScalarProperty Name="JCCo" ColumnName="JCCo" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="JobNum" ColumnName="JobNum" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateDesignLevels">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateDesignLevel">
+              <MappingFragment StoreEntitySet="tblTemplateDesignLevel">
+                <ScalarProperty Name="TemplateDesignLevelID" ColumnName="TemplateDesignLevelID" />
+                <ScalarProperty Name="TemplateDesignLevelCode" ColumnName="TemplateDesignLevelCode" />
+                <ScalarProperty Name="TemplateDesignLevelName" ColumnName="TemplateDesignLevelName" />
+                <ScalarProperty Name="TemplateDesignLevelSortOrder" ColumnName="TemplateDesignLevelSortOrder" />
+                <ScalarProperty Name="TemplateDesignLevelActive" ColumnName="TemplateDesignLevelActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateDivisions">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateDivision">
+              <MappingFragment StoreEntitySet="tblTemplateDivision">
+                <ScalarProperty Name="TemplateDivisionID" ColumnName="TemplateDivisionID" />
+                <ScalarProperty Name="TemplateDivisionNumber" ColumnName="TemplateDivisionNumber" />
+                <ScalarProperty Name="TemplateDivisionName" ColumnName="TemplateDivisionName" />
+                <ScalarProperty Name="TemplateDivisionPublic" ColumnName="TemplateDivisionPublic" />
+                <ScalarProperty Name="TemplateMajorSectionID" ColumnName="TemplateMajorSectionID" />
+                <ScalarProperty Name="TemplateDivisionSortOrder" ColumnName="TemplateDivisionSortOrder" />
+                <ScalarProperty Name="TemplateDivisionActive" ColumnName="TemplateDivisionActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateMajorSections">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateMajorSection">
+              <MappingFragment StoreEntitySet="tblTemplateMajorSection">
+                <ScalarProperty Name="TemplateMajorSectionID" ColumnName="TemplateMajorSectionID" />
+                <ScalarProperty Name="TemplateMajorSectionName" ColumnName="TemplateMajorSectionName" />
+                <ScalarProperty Name="TemplateMajorSectionSortOrder" ColumnName="TemplateMajorSectionSortOrder" />
+                <ScalarProperty Name="TemplateMajorSectionActive" ColumnName="TemplateMajorSectionActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateResults">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateResult">
+              <MappingFragment StoreEntitySet="tblTemplateResult">
+                <ScalarProperty Name="TemplateResultID" ColumnName="TemplateResultID" />
+                <ScalarProperty Name="TemplateResultName" ColumnName="TemplateResultName" />
+                <ScalarProperty Name="TemplateResultSortOrder" ColumnName="TemplateResultSortOrder" />
+                <ScalarProperty Name="TemplateResultActive" ColumnName="TemplateResultActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateReviewerTypes">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateReviewerType">
+              <MappingFragment StoreEntitySet="tblTemplateReviewerType">
+                <ScalarProperty Name="TemplateReviewerTypeID" ColumnName="TemplateReviewerTypeID" />
+                <ScalarProperty Name="TemplateReviewerTypeCode" ColumnName="TemplateReviewerTypeCode" />
+                <ScalarProperty Name="TemplateReviewerTypeName" ColumnName="TemplateReviewerTypeName" />
+                <ScalarProperty Name="TemplateReviewerTypeSortOrder" ColumnName="TemplateReviewerTypeSortOrder" />
+                <ScalarProperty Name="TemplateReviewerTypeActive" ColumnName="TemplateReviewerTypeActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateSections">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateSection">
+              <MappingFragment StoreEntitySet="tblTemplateSection">
+                <ScalarProperty Name="TemplateSectionID" ColumnName="TemplateSectionID" />
+                <ScalarProperty Name="TemplateSectionName" ColumnName="TemplateSectionName" />
+                <ScalarProperty Name="TemplateMajorSectionID" ColumnName="TemplateMajorSectionID" />
+                <ScalarProperty Name="TemplateDivisionID" ColumnName="TemplateDivisionID" />
+                <ScalarProperty Name="TemplateSectionSortOrder" ColumnName="TemplateSectionSortOrder" />
+                <ScalarProperty Name="TemplateSectionActive" ColumnName="TemplateSectionActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTemplateSectionItems">
+            <EntityTypeMapping TypeName="CRCTestModel.tblTemplateSectionItem">
+              <MappingFragment StoreEntitySet="tblTemplateSectionItem">
+                <ScalarProperty Name="TemplateSectionItemID" ColumnName="TemplateSectionItemID" />
+                <ScalarProperty Name="TemplateSectionItemCode" ColumnName="TemplateSectionItemCode" />
+                <ScalarProperty Name="TemplateSectionItemName" ColumnName="TemplateSectionItemName" />
+                <ScalarProperty Name="TemplateSectionItemLink" ColumnName="TemplateSectionItemLink" />
+                <ScalarProperty Name="TemplateSectionID" ColumnName="TemplateSectionID" />
+                <ScalarProperty Name="TemplateSectionItemSortOrder" ColumnName="TemplateSectionItemSortOrder" />
+                <ScalarProperty Name="TemplateSectionItemActive" ColumnName="TemplateSectionItemActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spBuild_JobOppList" FunctionName="CRCTestModel.Store.spBuild_JobOppList" />
+          <FunctionImportMapping FunctionImportName="spBuild_NewChecklistReviewForEdit" FunctionName="CRCTestModel.Store.spBuild_NewChecklistReviewForEdit" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

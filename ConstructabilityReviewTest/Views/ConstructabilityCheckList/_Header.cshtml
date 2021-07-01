@@ -1,0 +1,62 @@
+﻿@model  Constructability_Review_Test_Models.CTCHeader
+
+@{
+    ViewBag.Title = "_Header";
+}
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+@if (Model != null)
+{
+    using (Html.BeginForm("", "ConstructabilityCheckList", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "frmDetails" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label class="control-label col-xs-2 ">Job#</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Job, new { @class = "form-control", @onchange = "javascript:formatjobId();" })
+                @Html.ValidationMessageFor(model => model.Job, "", new { @class = "text-danger", Id = "errJobId" })
+            </div>
+        </div>
+        @*<div class="form-group">
+                <label class="control-label col-xs-2 ">Percentage</label>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(model => model.percentage, ViewBag.percentageLevel as IEnumerable<SelectListItem>, "--Select--", new { Class = "form-control" })
+                </div>
+            </div>*@
+        <div class="modal-footer col-sm-6">
+            <button class="btn btn-primary" id="btnSave" type="submit" onclick="javascript: return Submit();">Save</button>
+            <button class="btn btn-default" data-dismiss="modal" id="btnCancel">Cancel</button>
+        </div>
+    }
+}
+else
+{
+    <h4>No Data Found</h4>
+}
+@section scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js></script>
+    <script type="text/javascript" src=https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js></script>
+
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.Datepicker').datepicker('setDate', 'today');
+        });
+
+         @*function Submit() {
+                    var job = $("#Job").val();
+                window.location = '@Url.Action("GenerateCheckListUsingStoredProcedure", "ConstructabilityCheckList")' + '?Job=' + job;
+
+            }*@
+    </script>
+
+}
+
+
+
